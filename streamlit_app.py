@@ -94,15 +94,15 @@ else:
                         pdf_text = extract_text_from_pdf(uploaded_file)
                         # pdf_text = uploaded_file.read().decode()
                         if question:
-                            response_obj = requests.get(st.secrets.aws_url.link)
-                            response_obj.raise_for_status()
-                            aws_credential_dict = response_obj.json()
-
+                            # response_obj = requests.get(st.secrets.aws_url.link)
+                            # response_obj.raise_for_status()
+                            # aws_credential_dict = response_obj.json()
+                            # print(aws_credential_dict)
                             client = boto3.client(
                                 "bedrock-runtime",
-                                aws_access_key_id=aws_credential_dict["AccessKeyId"],
-                                aws_secret_access_key=aws_credential_dict["SecretAccessKey"],
-                                aws_session_token=aws_credential_dict["SessionToken"],
+                                aws_access_key_id=st.secrets.aws.access_id,
+                                aws_secret_access_key=st.secrets.aws.secret_access_key,
+                                aws_session_token=st.secrets.aws.session_token,
                                 region_name="us-east-1"
                             )
                             st.info("Connected to model")
